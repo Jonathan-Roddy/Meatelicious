@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -14,12 +17,13 @@ import com.mad.meatelicious.R;
 public class TimerFragment extends Fragment {
 
     private TimerViewModel timerViewModel;
+
 //    // Timer
-//    private EditText mEditTextInput;
-//    private TextView mTextViewCountDown;
-//    public Button mButtonSet;
-//    private Button mButtonStartPause;
-//    private Button mButtonReset;
+    private EditText mEditTextInput;
+    private TextView mTextViewCountDown;
+    public Button mButtonSet;
+    private Button mButtonStartPause;
+    private Button mButtonReset;
 //    private CountDownTimer mCountDownTimer;
 //    private boolean mTimerRunning;
 //    private long mStartTimeInMillis;
@@ -37,11 +41,11 @@ public class TimerFragment extends Fragment {
 //            }
 //        });
 
-//        mEditTextInput.findViewById(R.id.edit_text_input);
-//        mTextViewCountDown.findViewById(R.id.text_view_countdown);
-//        mButtonSet.findViewById(R.id.button_set);
-//        mButtonStartPause.findViewById(R.id.button_start_pause);
-//        mButtonReset.findViewById(R.id.button_reset);
+//        mEditTextInput = findViewById(R.id.edit_text_input);
+//        mTextViewCountDown = findViewById(R.id.text_view_countdown);
+//        mButtonSet = findViewById(R.id.button_set);
+//        mButtonStartPause = findViewById(R.id.button_start_pause);
+//        mButtonReset = findViewById(R.id.button_reset);
 
         //mTextViewCountDown.setText("Test");
         return root;

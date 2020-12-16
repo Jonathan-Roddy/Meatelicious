@@ -20,6 +20,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -48,9 +50,19 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference dbIngredient, dbRecipe, dbRecipeIngredients,dbRecipeSteps;
 
     /**
-     *  1) Recycler view is null pointer exception
-     *  2) Lists are generated in anomoyous inner class and not being stored globally
-     *  3) Timer functions in mainActivity doesnt show until its -- setContentView( R.layout.fragment_timer);
+     *  1) Recycler view is null pointer exception, copied from CardView demo example. debugged them side by side from OnStart and mine shows null object
+     *  2) Lists are generated in anomoyous inner class and not being stored globally, the lists can be called and displayed within this class
+     *  3) Timer functions in mainActivity doesnt show until its -- setContentView( R.layout.fragment_timer); I wish for it to be called when timer class onClick is
+     *
+     *  Possibility that not linking layouts but disapear when I add "import static com.mad.... R.id.fragment_timer"
+     *
+     *  Firebase is connected and working
+     *      - saves each Child as an object of ingredient, recipe, recipe-step, recipe-ingredient
+     *  Timer code works
+     *      - Extra feature
+     *
+     *
+     *
      */
 
     // this will store my lists from firebase
@@ -109,17 +121,18 @@ public class MainActivity extends AppCompatActivity {
 
         /////////////////////////////////////////////////////////////////////
 
-        recyclerView = (RecyclerView) findViewById(R.id.recipe_recycler_view);
-
         albumList = new ArrayList<>();
+        recyclerView = (RecyclerView) findViewById(R.id.recipe_recycler_view);
 
         adapter = new RecipeAdapter(this, albumList);
 
-//        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-//        recyclerView.setLayoutManager(mLayoutManager);
-//        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//        recyclerView.setAdapter(adapter);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
+        /////////////////////////////////////////////////////////////////////
 
 
         prepareAlbums();
@@ -145,11 +158,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    /**
-//     * Timer functions
-//     */
+    /**
+     * Timer functions
+     */
     private void prepareTimer() {
-        //setContentView( R.layout.fragment_timer);
+
+        /**
+         * Timer fully works if setContent is uncommented, but it will be shown on start up. Can not find the onClick for my Timer button on the nav-menu
+         */
+        // setContentView( R.layout.fragment_timer);
+
         mEditTextInput = findViewById(R.id.edit_text_input);
         mTextViewCountDown = findViewById(R.id.text_view_countdown);
         mButtonSet = findViewById(R.id.button_set);
@@ -321,6 +339,9 @@ public class MainActivity extends AppCompatActivity {
                     ingredientlistFromFirebase.add(ingredient);
                 }
 
+                /**
+                 *  uncomment this to see list display to the console
+                 */
 //                System.out.println("///////////// ingredientlistFromFirebase  " + "\n" + ingredientlistFromFirebase.toString());
 //                for(Ingredient ing : ingredientlist)
 //                {
