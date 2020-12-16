@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "585490581085",
+    "firebase_url": "https://meatelicious-5399e-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "meatelicious-5399e",
+    "storage_bucket": "meatelicious-5399e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585490581085:android:5e9fe3d969768589546fb4",
+        "android_client_info": {
+          "package_name": "com.mad.meatelicious"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "585490581085-2ktsnrlqjf29c6l17icpg3dgsk0m53kj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mad.meatelicious",
+            "certificate_hash": "420450e395451767c58e2aa17d5f3d4eb6fda0c6"
+          }
+        },
+        {
+          "client_id": "585490581085-no3obl9q7nkabpi669729k7bntn00a6f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVxF-_mUuYTGGEaNDpO8kSKYqFWmp73Vo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "585490581085-no3obl9q7nkabpi669729k7bntn00a6f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
