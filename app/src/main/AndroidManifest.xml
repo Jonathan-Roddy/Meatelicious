@@ -19,8 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.timer.TimerViewModel" />
-
+        <activity android:name=".TimerActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".food.Food1Activity" />
+        <activity android:name=".DashboardActivity" />
+        <activity android:name=".RecyclerActivity" />
     </application>
 
 </manifest>

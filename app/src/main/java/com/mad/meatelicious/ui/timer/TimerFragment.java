@@ -1,53 +1,31 @@
 package com.mad.meatelicious.ui.timer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.mad.meatelicious.R;
+import com.mad.meatelicious.TimerActivity;
 
 public class TimerFragment extends Fragment {
 
     private TimerViewModel timerViewModel;
 
-//    // Timer
-    private EditText mEditTextInput;
-    private TextView mTextViewCountDown;
-    public Button mButtonSet;
-    private Button mButtonStartPause;
-    private Button mButtonReset;
-//    private CountDownTimer mCountDownTimer;
-//    private boolean mTimerRunning;
-//    private long mStartTimeInMillis;
-//    private long mTimeLeftInMillis;
-//    private long mEndTime;
-
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
         timerViewModel = ViewModelProviders.of(this).get(TimerViewModel.class);
         View root = inflater.inflate(R.layout.fragment_timer, container, false);
-        //final TextView textView = root.findViewById(R.id.text_timer);
-//        timerViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
 
-//        mEditTextInput = findViewById(R.id.edit_text_input);
-//        mTextViewCountDown = findViewById(R.id.text_view_countdown);
-//        mButtonSet = findViewById(R.id.button_set);
-//        mButtonStartPause = findViewById(R.id.button_start_pause);
-//        mButtonReset = findViewById(R.id.button_reset);
 
-        //mTextViewCountDown.setText("Test");
+        // It is  called but replaces MainActivity,
+        Intent myIntent = new Intent(getActivity(), TimerActivity.class);
+        getActivity().startActivity(myIntent);
+
         return root;
     }
 

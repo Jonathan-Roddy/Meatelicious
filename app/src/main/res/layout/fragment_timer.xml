@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.mad.meatelicious.MainActivity"
+    tools:context="com.mad.meatelicious.TimerActivity"
 
     >
     <EditText
@@ -15,6 +15,7 @@
         android:layout_above="@+id/text_view_countdown"
         android:layout_centerHorizontal="true"
         android:hint="Minutes"
+        android:textColor="@android:color/black"
         android:inputType="number"
         android:maxLength="4" />
 
@@ -27,12 +28,12 @@
         android:layout_toRightOf="@+id/edit_text_input"
         android:onClick="buttonSetOnClick"
         android:text="Set" />
+
     <TextView
         android:id="@+id/text_view_countdown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
         android:text="00:00"
         android:textColor="@android:color/black"
         android:textSize="60sp" />

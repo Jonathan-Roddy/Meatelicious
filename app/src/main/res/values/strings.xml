@@ -15,4 +15,15 @@
     <string name="menu_timer">Timer</string>
     <string name="action_add_favourite">Add to Favourites</string>
     <string name="action_play_next">Play Next</string>
+
+    <string name="backdrop_title">LOVE MUSIC</string>
+    <string name="backdrop_subtitle">This season top 20 albums</string>
+    <string name="todo" />
+    <string name="prep">Prep Time</string>
+    <string name="cook">Cook Time</string>
+    <string name="ingred">Ingredients</string>
+    <string name="listIngred">List of Ingredients</string>
+    <string name="steps">Steps</string>
+    <string name="stepsList">Steps List</string>
+
 </resources>
