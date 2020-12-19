@@ -34,7 +34,7 @@ public class HomeActivityOld extends AppCompatActivity{
         //recyclerView = (RecyclerView) findViewById(R.id.recipe_recycler_view);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        adapter = new RecipeAdapter(this, albumList);
+        //adapter = new RecipeAdapter(this, albumList);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);

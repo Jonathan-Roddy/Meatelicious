@@ -11,19 +11,16 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-//import android.support.v7.widget.PopupMenu;
-//import android.support.v7.widget.RecyclerView;
-
-
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHolder> {
-
+public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.MyViewHolder> {
     private Context mContext;
-    //private List<Album> albumList;
-    private List<Recipe> recipeList;
+    private List<Album> albumList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, count;
@@ -39,10 +36,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
     }
 
 
-    public RecipeAdapter(Context mContext, List<Recipe> recipeList) {
+    public AlbumAdapter(Context mContext, List<Album> albumList) {
         this.mContext = mContext;
         //this.albumList = albumList;
-        this.recipeList = recipeList;
+        this.albumList = albumList;
     }
 
     @Override
@@ -54,14 +51,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
         //Album album = albumList.get(position);
-        Recipe recipe = recipeList.get(position);
-        holder.title.setText(recipe.getName());
-//        holder.count.setText(recipe.getNumOfSongs() + " songs");
+        Album album = albumList.get(position);
+        holder.title.setText(album.getName());
+        holder.count.setText(album.getNumOfSongs() + " songs");
 
-        // loading album cover using Glide library
-//        Glide.with(mContext).load(recipe.getThumbnail()).into(holder.thumbnail);
+//         loading album cover using Glide library
+        Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);
 
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +68,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
         });
     }
 
+
     /**
      * Showing popup menu when tapping on 3 dots
      */
@@ -79,7 +77,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
         PopupMenu popup = new PopupMenu(mContext, view);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_album, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
+        popup.setOnMenuItemClickListener(new AlbumAdapter.MyMenuItemClickListener());
         popup.show();
     }
 
@@ -108,6 +106,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return recipeList.size();
+        return albumList.size();
     }
 }

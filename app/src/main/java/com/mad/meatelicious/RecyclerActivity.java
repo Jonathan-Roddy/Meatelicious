@@ -27,32 +27,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  1) Recycler view is null pointer exception, copied from CardView demo example. debugged them side by side from OnStart and mine shows null object
- *  2) Lists are generated in anomoyous inner class and not being stored globally, the lists can be called and displayed within this class
- *  3) Timer functions in mainActivity doesnt show until its -- setContentView( R.layout.fragment_timer); I wish for it to be called when timer class onClick is
- *
- *  Possibility that not linking layouts but disapear when I add "import static com.mad.... R.id.fragment_timer"
- *
- *  Firebase is connected and working
- *      - saves each Child as an object of ingredient, recipe, recipe-step, recipe-ingredient
- *  Timer code works
- *      - Extra feature
- *
- *
- *
+ * 1) Recycler view is null pointer exception, copied from CardView demo example. debugged them side by side from OnStart and mine shows null object
+ * 2) Lists are generated in anomoyous inner class and not being stored globally, the lists can be called and displayed within this class
+ * 3) Timer functions in mainActivity doesnt show until its -- setContentView( R.layout.fragment_timer); I wish for it to be called when timer class onClick is
+ * <p>
+ * Possibility that not linking layouts but disapear when I add "import static com.mad.... R.id.fragment_timer"
+ * <p>
+ * Firebase is connected and working
+ * - saves each Child as an object of ingredient, recipe, recipe-step, recipe-ingredient
+ * Timer code works
+ * - Extra feature
  */
 
 public class RecyclerActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private RecipeAdapter adapter;
+    private AlbumAdapter albumAdapter;
+    private RecipeAdapter recipeAdapter;
     private List<Album> albumList;
     private static final String TAG = "MainActivity";
 
     private AppBarConfiguration mAppBarConfiguration;
 
     // firebase
-    private DatabaseReference dbIngredient, dbRecipe, dbRecipeIngredients,dbRecipeSteps;
+    private DatabaseReference dbIngredient, dbRecipe, dbRecipeIngredients, dbRecipeSteps;
 
 
     // this will store my lists from firebase
@@ -63,7 +61,7 @@ public class RecyclerActivity extends AppCompatActivity {
 
     // this will store my list of ingredients
     public List<Ingredient> ingredientlist = new ArrayList<Ingredient>();
-    public List<Recipe> recipelist = new ArrayList<Recipe>();
+    public List<Recipe> recipelist;
     public List<Recipe_Ingredients> recipeIngredientlist = new ArrayList<Recipe_Ingredients>();
     public List<Recipe_Steps> recipeStepslist = new ArrayList<Recipe_Steps>();
 
@@ -83,32 +81,56 @@ public class RecyclerActivity extends AppCompatActivity {
 //        });
 
 
-
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         albumList = new ArrayList<>();
-        adapter = new RecipeAdapter(this, albumList);
+
+        albumAdapter = new AlbumAdapter(this, albumList);
+        recipeAdapter = new RecipeAdapter(this, recipelist);
+
+        prepareAlbums();
+
+        prepareFirebase();
+        prepareRecipe();
+
+        prepareRecyclerView();
+
+//        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView.setAdapter(albumAdapter);
+
+
+//        recipeAdapter = new RecipeAdapter(this, recipelist);
+//
+//        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView.setAdapter(recipeAdapter);
+
+//        System.out.println("////////////////////////////////// INSIDE MAIN : " + recipelist);
+
+    }
+
+    private void prepareRecyclerView() {
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-
-        prepareAlbums();
-
-
-        prepareFirebase();
-
+        recyclerView.setAdapter(albumAdapter);
 
     }
+
 
     /**
      * Adding firebase
      */
     private void prepareFirebase() {
 
-        dbIngredient= FirebaseDatabase.getInstance().getReference("0/ingredient/");
+        dbIngredient = FirebaseDatabase.getInstance().getReference("0/ingredient/");
         // Attach a listener to read the data at our posts reference
         dbIngredient.addValueEventListener(new ValueEventListener() {
             @Override
@@ -117,16 +139,16 @@ public class RecyclerActivity extends AppCompatActivity {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
 
                 // Shake hands with all of them
-                for(DataSnapshot child : children ){
+                for (DataSnapshot child : children) {
 //                    System.out.println(child);
 //                    System.out.println("///////////// " + child.getValue());
                     Ingredient ingredient = child.getValue(Ingredient.class);
                     ingredientlistFromFirebase.add(ingredient);
                 }
 
-                /**
-                 *  uncomment this to see list display to the console
-                 */
+//                /**
+//                 *  uncomment this to see list display to the console
+//                 */
 //                System.out.println("///////////// ingredientlistFromFirebase  " + "\n" + ingredientlistFromFirebase.toString());
 //                for(Ingredient ing : ingredientlist)
 //                {
@@ -158,10 +180,20 @@ public class RecyclerActivity extends AppCompatActivity {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
 
                 // Shake hands with all of them
-                for(DataSnapshot child : children ){
+                for (DataSnapshot child : children) {
                     Recipe recipe = child.getValue(Recipe.class);
                     recipelistFromFirebase.add(recipe);
                 }
+//                System.out.println("////////////////////////////////// recipelistFromFirebase : " +recipelistFromFirebase);
+//                System.out.println("///////////// recipelistFromFirebase  " + "\n" + recipelistFromFirebase.toString());
+//                for(Recipe rep : recipelist)
+//                {
+//                    System.out.println("///////////////////// getName: " + rep.getName());
+//                    System.out.println("///////////////////// getDifficulty: " + rep.getDifficulty());
+//                }
+
+                storageContainer(recipelistFromFirebase);
+
             }
 
             @Override
@@ -169,6 +201,9 @@ public class RecyclerActivity extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
+
+        // End goal
+        recipelist = recipelistFromFirebase;
 
         ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -181,10 +216,18 @@ public class RecyclerActivity extends AppCompatActivity {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
 
                 // Shake hands with all of them
-                for(DataSnapshot child : children ){
+                for (DataSnapshot child : children) {
                     Recipe_Ingredients recipeIngredient = child.getValue(Recipe_Ingredients.class);
                     recipeIngredientlistFromFirebase.add(recipeIngredient);
                 }
+
+//                System.out.println("///////////// recipeIngredientlistFromFirebase  " + "\n" + recipeIngredientlistFromFirebase.toString());
+//                for(Recipe_Ingredients repIng : recipeIngredientlist)
+//                {
+//                    System.out.println("///////////////////// getIngredient_id: " + repIng.getIngredient_id());
+//                    System.out.println("///////////////////// getAmount: " + repIng.getAmount());
+//                }
+
             }
 
             @Override
@@ -192,6 +235,9 @@ public class RecyclerActivity extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
+
+        // End goal
+        recipeIngredientlist = recipeIngredientlistFromFirebase;
 
         ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -204,10 +250,19 @@ public class RecyclerActivity extends AppCompatActivity {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
 
                 // Shake hands with all of them
-                for(DataSnapshot child : children ){
+                for (DataSnapshot child : children) {
                     Recipe_Steps recipeSteps = child.getValue(Recipe_Steps.class);
                     recipeStepslistFromFirebase.add(recipeSteps);
+
                 }
+
+//                System.out.println("///////////// recipeStepslistFromFirebase  " + "\n" + recipeStepslistFromFirebase.toString());
+//                for(Recipe_Steps repStep : recipeStepslist)
+//                {
+//                    System.out.println("///////////////////// getIngredient_id: " + repStep.getInstructions());
+//                    System.out.println("///////////////////// getAmount: " + repStep.getStep_number());
+//                }
+
             }
 
             @Override
@@ -215,7 +270,17 @@ public class RecyclerActivity extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
+
+        // End goal
+        recipeStepslist = recipeStepslistFromFirebase;
+
     }
+
+    public void storageContainer(List<Recipe> recipeFromFirebase) {
+        recipelist = (ArrayList<Recipe>) recipeFromFirebase;
+        System.out.println("/////////////////////////////////////// inside storageContainer recipelist : " + recipelist);
+    }
+
 
     /**
      * Adding few albums for testing
@@ -265,6 +330,23 @@ public class RecyclerActivity extends AppCompatActivity {
 
         // UNCOMMENT WHEN READY
         //adapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Adding Recipes from firebase into arraylist
+     */
+    private void prepareRecipe() {
+
+//        int[] covers = new int[]{
+//                R.drawable.album1,
+//                R.drawable.album2,
+//                R.drawable.album3,
+//                R.drawable.album4,
+//                R.drawable.album5};
+
+//        Recipe r = new Recipe("True Romance", 13, covers[0]);
+//        recipelist.add(r);
+
     }
 
     /**
@@ -331,40 +413,12 @@ public class RecyclerActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-//        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        editor.putLong("startTimeInMillis", mStartTimeInMillis);
-//        editor.putLong("millisLeft", mTimeLeftInMillis);
-//        editor.putBoolean("timerRunning", mTimerRunning);
-//        editor.putLong("endTime", mEndTime);
-//        editor.apply();
-//        if (mCountDownTimer != null) {
-//            mCountDownTimer.cancel();
-//        }
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
-//        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-//        mStartTimeInMillis = prefs.getLong("startTimeInMillis", 600000);
-//        mTimeLeftInMillis = prefs.getLong("millisLeft", mStartTimeInMillis);
-//        mTimerRunning = prefs.getBoolean("timerRunning", false);
-//        updateCountDownText();
-//        updateWatchInterface();
-//        if (mTimerRunning) {
-//            mEndTime = prefs.getLong("endTime", 0);
-//            mTimeLeftInMillis = mEndTime - System.currentTimeMillis();
-//            if (mTimeLeftInMillis < 0) {
-//                mTimeLeftInMillis = 0;
-//                mTimerRunning = false;
-//                updateCountDownText();
-//                updateWatchInterface();
-//            } else {
-//                startTimer();
-//            }
-//        }
 
     }
 
