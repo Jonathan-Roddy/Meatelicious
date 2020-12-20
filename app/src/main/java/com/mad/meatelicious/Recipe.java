@@ -10,9 +10,21 @@ public class Recipe {
     private String serving;
     private String author;
     private String difficulty;
+    private int thumbnail;
+
+    public Recipe(String id, String name, String difficulty, int cover) {
+        this.recipe_id = id;
+        this.name = name;
+        this.difficulty = difficulty;
+        this.thumbnail = cover;
+    }
 
     public Recipe() {
 
+    }
+
+    public int getThumbnail() {
+        return thumbnail;
     }
 
     public Recipe(String recipe_id, String name, String description, String category, String prep_time, String cook_time, String serving, String author, String difficulty) {
@@ -112,5 +124,9 @@ public class Recipe {
 
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public void setThumbnail(int thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }

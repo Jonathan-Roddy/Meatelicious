@@ -11,31 +11,34 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-//import android.support.v7.widget.PopupMenu;
-//import android.support.v7.widget.RecyclerView;
-
-
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHolder> {
-
     private Context mContext;
-    //private List<Album> albumList;
     private List<Recipe> recipeList;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, count;
-        public ImageView thumbnail, overflow;
+    @Override
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
+        //Album album = albumList.get(position);
+        Recipe recipe = recipeList.get(position);
+        holder.title.setText(recipe.getName());
+        holder.count.setText(recipe.getDifficulty() + " : difficulty");
 
-        public MyViewHolder(View view) {
-            super(view);
-            title = (TextView) view.findViewById(R.id.title);
-            count = (TextView) view.findViewById(R.id.count);
-            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            overflow = (ImageView) view.findViewById(R.id.overflow);
-        }
+//         loading album cover using Glide library
+        Glide.with(mContext).load(recipe.getThumbnail()).into(holder.thumbnail);
+
+        holder.overflow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopupMenu(holder.overflow);
+            }
+        });
     }
 
 
@@ -53,24 +56,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
         return new MyViewHolder(itemView);
     }
 
-    @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
-        //Album album = albumList.get(position);
-        Recipe recipe = recipeList.get(position);
-        holder.title.setText(recipe.getName());
-//        holder.count.setText(recipe.getNumOfSongs() + " songs");
-
-        // loading album cover using Glide library
-//        Glide.with(mContext).load(recipe.getThumbnail()).into(holder.thumbnail);
-
-        holder.overflow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopupMenu(holder.overflow);
-            }
-        });
-    }
-
     /**
      * Showing popup menu when tapping on 3 dots
      */
@@ -79,8 +64,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
         PopupMenu popup = new PopupMenu(mContext, view);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_album, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
+        popup.setOnMenuItemClickListener(new RecipeAdapter.MyMenuItemClickListener());
         popup.show();
+    }
+
+    @Override
+    public int getItemCount() {
+//        return recipeList.size();
+        return 5;
     }
 
     /**
@@ -106,8 +97,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
         }
     }
 
-    @Override
-    public int getItemCount() {
-        return recipeList.size();
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView title, count;
+        public ImageView thumbnail, overflow;
+        public CardView cv;
+
+        public MyViewHolder(View view) {
+            super(view);
+            title = (TextView) view.findViewById(R.id.title);
+            count = (TextView) view.findViewById(R.id.count);
+            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+            overflow = (ImageView) view.findViewById(R.id.overflow);
+
+        }
     }
 }

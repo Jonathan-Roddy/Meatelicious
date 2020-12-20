@@ -1,5 +1,6 @@
 package com.mad.meatelicious;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mad.meatelicious.food.Food1Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,33 +86,20 @@ public class RecyclerActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         albumList = new ArrayList<>();
+//        recipelist = new ArrayList<>();
+
+
+        prepareFirebase();
+
+        prepareRecipe();
+        prepareAlbums();
 
         albumAdapter = new AlbumAdapter(this, albumList);
         recipeAdapter = new RecipeAdapter(this, recipelist);
 
-        prepareAlbums();
-
-        prepareFirebase();
-        prepareRecipe();
-
         prepareRecyclerView();
 
-//        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-//        recyclerView.setLayoutManager(mLayoutManager);
-//        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//        recyclerView.setAdapter(albumAdapter);
-
-
-//        recipeAdapter = new RecipeAdapter(this, recipelist);
-//
-//        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-//        recyclerView.setLayoutManager(mLayoutManager);
-//        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//        recyclerView.setAdapter(recipeAdapter);
-
-//        System.out.println("////////////////////////////////// INSIDE MAIN : " + recipelist);
+//        System.out.println("//////////////////////////// inside main- hardcode"+ recipelist);
 
     }
 
@@ -120,8 +109,26 @@ public class RecyclerActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(albumAdapter);
+        recyclerView.setAdapter(recipeAdapter);
 
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerView, new RecyclerItemClickListener
+                .OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                //start new activity here
+                Intent i = new Intent(getBaseContext(), Food1Activity.class);
+                i.putExtra("position", position);
+
+                startActivity(i);
+                System.out.println("////////////////////////// position " + position);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+        }));
+//        recyclerView.setAdapter(albumAdapter);
     }
 
 
@@ -337,15 +344,30 @@ public class RecyclerActivity extends AppCompatActivity {
      */
     private void prepareRecipe() {
 
-//        int[] covers = new int[]{
-//                R.drawable.album1,
-//                R.drawable.album2,
-//                R.drawable.album3,
-//                R.drawable.album4,
-//                R.drawable.album5};
+        int[] image = new int[]{
+                R.drawable.ribeye,
+                R.drawable.roastpotatoes,
+                R.drawable.beefwellington,
+                R.drawable.mangolimewings,
+                R.drawable.stickytoffee
+        };
+//        Recipe(String recipe_id, String name, String description, String category, String prep_time, String cook_time, String serving, String author, String difficulty)
 
-//        Recipe r = new Recipe("True Romance", 13, covers[0]);
-//        recipelist.add(r);
+//        Recipe r = new Recipe( "1", "Rib-eye with steak pan potatoes & peas", "Indulge in rib-eye steak, which takes just 20", "Gluten-free", "5 mins", "15 mins", "4","Tom Kerridge","Easy", covers[0] );
+        Recipe t = new Recipe("1", "Rib-eye with steak pan potatoes & peas", "Easy", image[0]);
+        recipelist.add(t);
+
+        t = new Recipe("2", "Golden roast potatoes", "Easy", image[1]);
+        recipelist.add(t);
+
+        t = new Recipe("3", "Beef wellington", "A challenge", image[2]);
+        recipelist.add(t);
+
+        t = new Recipe("4", "Mango & lime chicken wings", "Easy", image[3]);
+        recipelist.add(t);
+
+        t = new Recipe("5", "Sticky toffee apple pudding", "Easy", image[4]);
+        recipelist.add(t);
 
     }
 
