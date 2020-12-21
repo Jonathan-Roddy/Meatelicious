@@ -10,8 +10,14 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mad.meatelicious.food.Food1Activity;
-
-import java.util.List;
+/**
+ * This is my HomeActivity class.
+ * <p>
+ * This is now redundant code. I used this to help debug my activity classes.
+ * Main system does not call or use any info
+ * <p>
+ * I have kept this to show my work
+ */
 
 public class HomeActivity extends AppCompatActivity{
 
@@ -20,7 +26,7 @@ public class HomeActivity extends AppCompatActivity{
 
     private RecyclerView recyclerView;
     private RecipeAdapter adapter;
-    private List<Album> albumList;
+//    private List<Album> albumList;
 
 
     @Override

@@ -1,11 +1,17 @@
 package com.mad.meatelicious;
 
+/**
+ * This is my Recipe_Steps class.
+ * <p>
+ * This is an Object Oriented approach to saving data into my system.
+ */
+
 public class Recipe_Steps {
     private String recipe_id;
     private String step_number;
     private String instructions;
 
-    public Recipe_Steps(){
+    public Recipe_Steps() {
     }
 
     @Override
@@ -46,7 +52,6 @@ public class Recipe_Steps {
     public void setInstructions(String instructions) {
         this.instructions = instructions;
     }
-
 
 
 }

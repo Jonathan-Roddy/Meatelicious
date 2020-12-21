@@ -1,5 +1,11 @@
 package com.mad.meatelicious;
 
+/**
+ * This is my Recipe class.
+ * <p>
+ * This is an Object Oriented approach to saving data into my system.
+ */
+
 public class Recipe {
     private String recipe_id;
     private String name;

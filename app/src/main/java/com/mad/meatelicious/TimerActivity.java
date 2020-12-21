@@ -16,6 +16,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
 
+/**
+ * This is my TimerActivity class.
+ * <p>
+ * This will show the user a timer. This is a built in timer allowing the user to have a count down function in only a few clicks
+ * when time is up, a ringtone alarm will ring.
+ */
+
 public class TimerActivity extends AppCompatActivity {
 
     // Timer
@@ -44,6 +51,7 @@ public class TimerActivity extends AppCompatActivity {
         /////////////////////////////////////////////////////////////////////
 
     }
+
     /**
      * Timer functions
      */
@@ -53,6 +61,7 @@ public class TimerActivity extends AppCompatActivity {
         resetTimer();
         closeKeyboard();
     }
+
     private void startTimer() {
         long mEndTime = System.currentTimeMillis() + mTimeLeftInMillis;
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
@@ -61,6 +70,7 @@ public class TimerActivity extends AppCompatActivity {
                 mTimeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
             }
+
             @Override
             public void onFinish() {
                 mTimerRunning = false;
@@ -71,6 +81,7 @@ public class TimerActivity extends AppCompatActivity {
         mTimerRunning = true;
         updateWatchInterface();
     }
+
     private void alartUser(){
         AlertDialog.Builder dialog=new AlertDialog.Builder(this);
         dialog.setMessage("Your time is up! ");
@@ -98,11 +109,13 @@ public class TimerActivity extends AppCompatActivity {
         mTimerRunning = false;
         updateWatchInterface();
     }
+
     private void resetTimer() {
         mTimeLeftInMillis = mStartTimeInMillis;
         updateCountDownText();
         updateWatchInterface();
     }
+
     private void updateCountDownText() {
         int hours = (int) (mTimeLeftInMillis / 1000) / 3600;
         int minutes = (int) ((mTimeLeftInMillis / 1000) % 3600) / 60;
@@ -136,6 +149,7 @@ public class TimerActivity extends AppCompatActivity {
 //            alertDialog.show();
 //        }
     }
+
     private void updateWatchInterface() {
         if (mTimerRunning) {
             mEditTextInput.setVisibility(View.INVISIBLE);
@@ -158,6 +172,7 @@ public class TimerActivity extends AppCompatActivity {
             }
         }
     }
+
     private void closeKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
@@ -183,6 +198,7 @@ public class TimerActivity extends AppCompatActivity {
         setTime(millisInput);
         mEditTextInput.setText("");
     }
+
     public void buttonStartPauseOnClick(View view) {
         if (mTimerRunning) {
             pauseTimer();
@@ -191,11 +207,10 @@ public class TimerActivity extends AppCompatActivity {
         }
 
     }
+
     public void buttonResetOnClick(View view) {
         resetTimer();
     }
-
-
 
 
 }

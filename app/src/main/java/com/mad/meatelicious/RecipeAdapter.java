@@ -19,6 +19,12 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+/**
+ * This is my RecipeAdapter class.
+ * <p>
+ * This will be able to accept a list of recipes and format the data so that it can be used for the CardViews on the recycler view
+ */
+
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHolder> {
     private Context mContext;
     private List<Recipe> recipeList;

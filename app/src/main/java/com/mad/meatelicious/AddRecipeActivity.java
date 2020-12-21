@@ -9,6 +9,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+/**
+ * This is my AddRecipeActivity class.
+ * <p>
+ * This will show the user a view with some editText views to add a new recipe
+ * This is not working as I did not have enough time to finish off the coding due to consistent errors that took 5 days to try to fix.
+ */
+
 public class AddRecipeActivity extends AppCompatActivity {
 
 

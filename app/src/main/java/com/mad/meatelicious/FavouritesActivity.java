@@ -28,6 +28,15 @@ import com.mad.meatelicious.food.Food1Activity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is my FavouritesActivity class.
+ * <p>
+ * This is show the user their favourite recipes
+ * <p>
+ * This is hardcoded as I did not have enough time to be able to implement this function
+ * This is not working as I did not have enough time to finish off the coding due to consistent errors that took 5 days to try to fix.
+ */
+
 public class FavouritesActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
@@ -43,7 +52,7 @@ public class FavouritesActivity extends AppCompatActivity {
     public List<Recipe_Steps> recipeStepslist = new ArrayList<Recipe_Steps>();
     private RecyclerView recyclerView;
     private RecipeAdapter recipeAdapter;
-    private List<Album> albumList;
+    // private List<Album> albumList;
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -64,16 +73,15 @@ public class FavouritesActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
 
-        albumList = new ArrayList<>();
+        //albumList = new ArrayList<>();
 //        recipelist = new ArrayList<>();
 
 
         prepareFirebase();
 
         prepareRecipe();
-        prepareAlbums();
 
-        AlbumAdapter albumAdapter = new AlbumAdapter(this, albumList);
+        //AlbumAdapter albumAdapter = new AlbumAdapter(this, albumList);
         recipeAdapter = new RecipeAdapter(this, recipelist);
 
         prepareRecyclerView();
@@ -268,59 +276,12 @@ public class FavouritesActivity extends AppCompatActivity {
         System.out.println("/////////////////////////////////////// inside storageContainer recipelist : " + recipelist);
     }
 
-
-    /**
-     * Adding few albums for testing
-     */
-    private void prepareAlbums() {
-        int[] covers = new int[]{
-                R.drawable.album1,
-                R.drawable.album2,
-                R.drawable.album3,
-                R.drawable.album4,
-                R.drawable.album5,
-                R.drawable.album6,
-                R.drawable.album7,
-                R.drawable.album8,
-                R.drawable.album9,
-                R.drawable.album10};
-
-        Album a = new Album("True Romance", 13, covers[0]);
-        albumList.add(a);
-
-        a = new Album("Xscpae", 8, covers[1]);
-        albumList.add(a);
-
-        a = new Album("Maroon 5", 11, covers[2]);
-        albumList.add(a);
-
-        a = new Album("Born to Die", 12, covers[3]);
-        albumList.add(a);
-
-        a = new Album("Honeymoon", 14, covers[4]);
-        albumList.add(a);
-
-        a = new Album("I Need a Doctor", 1, covers[5]);
-        albumList.add(a);
-
-        a = new Album("Loud", 11, covers[6]);
-        albumList.add(a);
-
-        a = new Album("Legend", 14, covers[7]);
-        albumList.add(a);
-
-        a = new Album("Hello", 11, covers[8]);
-        albumList.add(a);
-
-        a = new Album("Greatest Hits", 17, covers[9]);
-        albumList.add(a);
-
-        // UNCOMMENT WHEN READY
-        //adapter.notifyDataSetChanged();
-    }
-
     /**
      * Adding Recipes from firebase into arraylist
+     * <p>
+     * <p>
+     * Had To hardcode due to timeframe left
+     * Images have comments below
      */
     private void prepareRecipe() {
 

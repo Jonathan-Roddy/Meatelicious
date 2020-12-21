@@ -1,10 +1,16 @@
 package com.mad.meatelicious;
 
+/**
+ * This is my Ingredient class.
+ * <p>
+ * This is an Object Oriented approach to saving data into my system.
+ */
+
 public class Ingredient {
     private String ingredient_id;
     private String name;
 
-    public Ingredient(){
+    public Ingredient() {
     }
 
     @Override

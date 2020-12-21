@@ -7,6 +7,13 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * This is my RecyclerItemClickListener class.
+ * <p>
+ * This class is responsiable for allowing the user to click on a cardview that is in a recycler view and pass the action into it
+ * I have also added a short and long press function but I have only used the short press function
+ */
+
 public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
 
     @SuppressWarnings("CanBeFinal")

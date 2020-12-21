@@ -7,6 +7,16 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+/**
+ * This is my Dashboard class.
+ * <p>
+ * This will show the user 4 card views to choose
+ * Recipe - goes to recycler view for recipes
+ * Timer - goes to timer class
+ * Recycler - goes to favourites
+ * aboutUs - not working
+ */
+
 public class DashboardActivity extends AppCompatActivity {
 
     CardView cRecipe, cTimer, cRecycler, cAboutus;

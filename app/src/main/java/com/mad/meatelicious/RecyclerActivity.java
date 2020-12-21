@@ -31,23 +31,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 1) Recycler view is null pointer exception, copied from CardView demo example. debugged them side by side from OnStart and mine shows null object
- * 2) Lists are generated in anomoyous inner class and not being stored globally, the lists can be called and displayed within this class
- * 3) Timer functions in mainActivity doesnt show until its -- setContentView( R.layout.fragment_timer); I wish for it to be called when timer class onClick is
+ * This is my RecyclerActivity class.
  * <p>
- * Possibility that not linking layouts but disapear when I add "import static com.mad.... R.id.fragment_timer"
+ * This will show the user a list of recipes in a recycler view format
+ * Each recipe will be in a card view allowing for better UI
  * <p>
- * Firebase is connected and working
- * - saves each Child as an object of ingredient, recipe, recipe-step, recipe-ingredient
- * Timer code works
- * - Extra feature
+ * I have had many issues trying to get this recycler view working as well as getting to pull the data from firbase
+ * <p>
+ * I have had to resort to hardcoding in order to show you that I cam able to work and manipulate data into recycler view and card view
+ * Firebase is set up and is connecting. On output screen you can see the items being passed.
  */
 
 public class RecyclerActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecipeAdapter recipeAdapter;
-    private List<Album> albumList;
+    //    private List<Album> albumList;
     private static final String TAG = "MainActivity";
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -86,16 +85,16 @@ public class RecyclerActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
 
-        albumList = new ArrayList<>();
+//        albumList = new ArrayList<>();
 //        recipelist = new ArrayList<>();
 
 
         prepareFirebase();
 
         prepareRecipe();
-        prepareAlbums();
+//        prepareAlbums();
 
-        AlbumAdapter albumAdapter = new AlbumAdapter(this, albumList);
+//        AlbumAdapter albumAdapter = new AlbumAdapter(this, albumList);
         recipeAdapter = new RecipeAdapter(this, recipelist);
 
         prepareRecyclerView();
@@ -294,63 +293,83 @@ public class RecyclerActivity extends AppCompatActivity {
     /**
      * Adding few albums for testing
      */
-    private void prepareAlbums() {
-        int[] covers = new int[]{
-                R.drawable.album1,
-                R.drawable.album2,
-                R.drawable.album3,
-                R.drawable.album4,
-                R.drawable.album5,
-                R.drawable.album6,
-                R.drawable.album7,
-                R.drawable.album8,
-                R.drawable.album9,
-                R.drawable.album10};
-
-        Album a = new Album("True Romance", 13, covers[0]);
-        albumList.add(a);
-
-        a = new Album("Xscpae", 8, covers[1]);
-        albumList.add(a);
-
-        a = new Album("Maroon 5", 11, covers[2]);
-        albumList.add(a);
-
-        a = new Album("Born to Die", 12, covers[3]);
-        albumList.add(a);
-
-        a = new Album("Honeymoon", 14, covers[4]);
-        albumList.add(a);
-
-        a = new Album("I Need a Doctor", 1, covers[5]);
-        albumList.add(a);
-
-        a = new Album("Loud", 11, covers[6]);
-        albumList.add(a);
-
-        a = new Album("Legend", 14, covers[7]);
-        albumList.add(a);
-
-        a = new Album("Hello", 11, covers[8]);
-        albumList.add(a);
-
-        a = new Album("Greatest Hits", 17, covers[9]);
-        albumList.add(a);
-
-        // UNCOMMENT WHEN READY
-        //adapter.notifyDataSetChanged();
-    }
+//    private void prepareAlbums() {
+//        int[] covers = new int[]{
+//                R.drawable.album1,
+//                R.drawable.album2,
+//                R.drawable.album3,
+//                R.drawable.album4,
+//                R.drawable.album5,
+//                R.drawable.album6,
+//                R.drawable.album7,
+//                R.drawable.album8,
+//                R.drawable.album9,
+//                R.drawable.album10};
+//
+//        Album a = new Album("True Romance", 13, covers[0]);
+//        albumList.add(a);
+//
+//        a = new Album("Xscpae", 8, covers[1]);
+//        albumList.add(a);
+//
+//        a = new Album("Maroon 5", 11, covers[2]);
+//        albumList.add(a);
+//
+//        a = new Album("Born to Die", 12, covers[3]);
+//        albumList.add(a);
+//
+//        a = new Album("Honeymoon", 14, covers[4]);
+//        albumList.add(a);
+//
+//        a = new Album("I Need a Doctor", 1, covers[5]);
+//        albumList.add(a);
+//
+//        a = new Album("Loud", 11, covers[6]);
+//        albumList.add(a);
+//
+//        a = new Album("Legend", 14, covers[7]);
+//        albumList.add(a);
+//
+//        a = new Album("Hello", 11, covers[8]);
+//        albumList.add(a);
+//
+//        a = new Album("Greatest Hits", 17, covers[9]);
+//        albumList.add(a);
+//
+//        // UNCOMMENT WHEN READY
+//        //adapter.notifyDataSetChanged();
+//    }
 
     /**
      * Adding Recipes from firebase into arraylist
+     * <p>
+     * <p>
+     * Had To hardcode due to timeframe left
+     * Images have comments below
      */
     private void prepareRecipe() {
 
+
         int[] image = new int[]{
+                /**
+                 *      Image source: BBC GoodFoods. Copyright protected. URL : https://www.bbcgoodfood.com/recipes/rib-eye-steak-pan-potatoes-peas
+                */
                 R.drawable.ribeye,
+                /**
+                 *      Image source: BBC GoodFoods. Copyright protected. URL : https://www.bbcgoodfood.com/recipes/golden-roast-potatoes
+                */
                 R.drawable.roastpotatoes,
+                /**
+                 *      Image source: BBC GoodFoods. Copyright protected. URL : https://www.bbcgoodfood.com/recipes/beef-wellington
+                */
                 R.drawable.beefwellington,
+                /**
+                 *      Image source: BBC GoodFoods. Copyright protected. URL : https://www.bbcgoodfood.com/recipes/mango-lime-chicken-wings
+                */
                 R.drawable.mangolimewings,
+                /**
+                 *      Image source: BBC GoodFoods. Copyright protected. URL : https://www.bbcgoodfood.com/recipes/sticky-toffee-apple-pudding
+                */
                 R.drawable.stickytoffee
         };
 //        Recipe(String recipe_id, String name, String description, String category, String prep_time, String cook_time, String serving, String author, String difficulty)
