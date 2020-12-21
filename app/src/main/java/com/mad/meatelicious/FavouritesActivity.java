@@ -18,8 +18,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,62 +28,41 @@ import com.mad.meatelicious.food.Food1Activity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 1) Recycler view is null pointer exception, copied from CardView demo example. debugged them side by side from OnStart and mine shows null object
- * 2) Lists are generated in anomoyous inner class and not being stored globally, the lists can be called and displayed within this class
- * 3) Timer functions in mainActivity doesnt show until its -- setContentView( R.layout.fragment_timer); I wish for it to be called when timer class onClick is
- * <p>
- * Possibility that not linking layouts but disapear when I add "import static com.mad.... R.id.fragment_timer"
- * <p>
- * Firebase is connected and working
- * - saves each Child as an object of ingredient, recipe, recipe-step, recipe-ingredient
- * Timer code works
- * - Extra feature
- */
+public class FavouritesActivity extends AppCompatActivity {
 
-public class RecyclerActivity extends AppCompatActivity {
-
-    private RecyclerView recyclerView;
-    private AlbumAdapter albumAdapter;
-    private RecipeAdapter recipeAdapter;
-    private List<Album> albumList;
     private static final String TAG = "MainActivity";
-
-    private AppBarConfiguration mAppBarConfiguration;
-
-    // firebase
-    private DatabaseReference dbIngredient, dbRecipe, dbRecipeIngredients, dbRecipeSteps;
-
-
     // this will store my lists from firebase
     final public List<Ingredient> ingredientlistFromFirebase = new ArrayList<Ingredient>();
     final public List<Recipe> recipelistFromFirebase = new ArrayList<Recipe>();
     final public List<Recipe_Ingredients> recipeIngredientlistFromFirebase = new ArrayList<Recipe_Ingredients>();
     final public List<Recipe_Steps> recipeStepslistFromFirebase = new ArrayList<Recipe_Steps>();
-
     // this will store my list of ingredients
     public List<Ingredient> ingredientlist = new ArrayList<Ingredient>();
     public List<Recipe> recipelist;
     public List<Recipe_Ingredients> recipeIngredientlist = new ArrayList<Recipe_Ingredients>();
     public List<Recipe_Steps> recipeStepslist = new ArrayList<Recipe_Steps>();
+    private RecyclerView recyclerView;
+    private AlbumAdapter albumAdapter;
+    private RecipeAdapter recipeAdapter;
+    private List<Album> albumList;
+    private AppBarConfiguration mAppBarConfiguration;
+    // firebase
+    private DatabaseReference dbIngredient, dbRecipe, dbRecipeIngredients, dbRecipeSteps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_cardview);
+        setContentView(R.layout.activity_main_favourites);
 
         // Floating Action Button
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Adding a new Recipe", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null)
-                        .show();
-                Intent a = new Intent(RecyclerActivity.this, AddRecipeActivity.class);
-                startActivity(a);
-            }
-        });
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
 
         recyclerView = findViewById(R.id.recycler_view);
@@ -112,7 +89,7 @@ public class RecyclerActivity extends AppCompatActivity {
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.addItemDecoration(new FavouritesActivity.GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(recipeAdapter);
 
@@ -377,6 +354,40 @@ public class RecyclerActivity extends AppCompatActivity {
     }
 
     /**
+     * Converting dp to pixel
+     */
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
+    /**
      * RecyclerView item decoration - give equal margin around grid item
      */
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
@@ -412,41 +423,6 @@ public class RecyclerActivity extends AppCompatActivity {
                 }
             }
         }
-    }
-
-    /**
-     * Converting dp to pixel
-     */
-    private int dpToPx(int dp) {
-        Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
     }
 
 

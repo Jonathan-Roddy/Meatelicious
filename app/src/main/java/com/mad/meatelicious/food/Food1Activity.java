@@ -45,7 +45,7 @@ public class Food1Activity extends AppCompatActivity {
 
         recipeImageSmall = findViewById(R.id.recipeImageSmall);
         recipeTitle = findViewById(R.id.recipeTitle);
-        recipeAuthor = findViewById(R.id.recipeAuthor);
+        recipeAuthor = findViewById(R.id.recipeAuthorNameRecipe);
         recipeTitleSmall = findViewById(R.id.recipeTitleSmall);
         prepTime = findViewById(R.id.prepTime);
         cookTime = findViewById(R.id.cookTime);

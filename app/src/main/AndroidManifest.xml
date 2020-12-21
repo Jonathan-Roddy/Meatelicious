@@ -24,6 +24,8 @@
         <activity android:name=".food.Food1Activity" />
         <activity android:name=".DashboardActivity" />
         <activity android:name=".RecyclerActivity" />
+        <activity android:name=".FavouritesActivity" />
+        <activity android:name=".AddRecipeActivity" />
     </application>
 
 </manifest>

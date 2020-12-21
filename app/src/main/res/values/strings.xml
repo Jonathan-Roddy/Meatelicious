@@ -25,5 +25,8 @@
     <string name="listIngred">List of Ingredients</string>
     <string name="steps">Steps</string>
     <string name="stepsList">Steps List</string>
+    <string name="new_recipe">New Recipe</string>
+    <string name="recipeserves">recipeServes</string>
+    <string name="difficulty">Difficulty :</string>
 
 </resources>

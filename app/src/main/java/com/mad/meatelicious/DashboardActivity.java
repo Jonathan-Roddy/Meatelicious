@@ -15,15 +15,16 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        cRecipe = (CardView) findViewById(R.id.menu_recipe);
-        cTimer = (CardView) findViewById(R.id.menu_timer);
-        cRecycler = (CardView) findViewById(R.id.menu_recycler);
-        cAboutus = (CardView) findViewById(R.id.menu_aboutus);
+
+        cRecipe = findViewById(R.id.menu_recipe);
+        cTimer = findViewById(R.id.menu_timer);
+        cRecycler = findViewById(R.id.menu_youtube);
+        cAboutus = findViewById(R.id.menu_aboutus);
 
         cRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent a = new Intent(DashboardActivity.this, HomeActivity.class);
+                Intent a = new Intent(DashboardActivity.this, RecyclerActivity.class);
                 startActivity(a);
             }
         });
@@ -39,7 +40,7 @@ public class DashboardActivity extends AppCompatActivity {
         cRecycler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent a = new Intent(DashboardActivity.this, RecyclerActivity.class);
+                Intent a = new Intent(DashboardActivity.this, FavouritesActivity.class);
                 startActivity(a);
             }
         });
