@@ -28,7 +28,6 @@ public class TimerActivity extends AppCompatActivity {
     private boolean mTimerRunning;
     private long mStartTimeInMillis;
     private long mTimeLeftInMillis;
-    private long mEndTime;
 
 
     @Override
@@ -55,7 +54,7 @@ public class TimerActivity extends AppCompatActivity {
         closeKeyboard();
     }
     private void startTimer() {
-        mEndTime = System.currentTimeMillis() + mTimeLeftInMillis;
+        long mEndTime = System.currentTimeMillis() + mTimeLeftInMillis;
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {

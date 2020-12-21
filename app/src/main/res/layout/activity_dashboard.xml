@@ -66,6 +66,7 @@
                         android:text="RECIPE"
                         android:textAlignment="center"
                         android:textSize="27dp"
+                        android:gravity="center_horizontal"
                         android:textStyle="bold" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -103,6 +104,7 @@
                         android:text="Timer"
                         android:textAlignment="center"
                         android:textSize="27dp"
+                        android:gravity="center_horizontal"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -141,6 +143,7 @@
                         android:text="Favourites"
                         android:textAlignment="center"
                         android:textSize="27dp"
+                        android:gravity="center_horizontal"
                         android:textStyle="bold" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -178,6 +181,7 @@
                         android:text="ABOUT US"
                         android:textAlignment="center"
                         android:textSize="27dp"
+                        android:gravity="center_horizontal"
                         android:textStyle="bold" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

@@ -46,15 +46,11 @@ import java.util.List;
 public class RecyclerActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private AlbumAdapter albumAdapter;
     private RecipeAdapter recipeAdapter;
     private List<Album> albumList;
     private static final String TAG = "MainActivity";
 
     private AppBarConfiguration mAppBarConfiguration;
-
-    // firebase
-    private DatabaseReference dbIngredient, dbRecipe, dbRecipeIngredients, dbRecipeSteps;
 
 
     // this will store my lists from firebase
@@ -99,7 +95,7 @@ public class RecyclerActivity extends AppCompatActivity {
         prepareRecipe();
         prepareAlbums();
 
-        albumAdapter = new AlbumAdapter(this, albumList);
+        AlbumAdapter albumAdapter = new AlbumAdapter(this, albumList);
         recipeAdapter = new RecipeAdapter(this, recipelist);
 
         prepareRecyclerView();
@@ -142,7 +138,8 @@ public class RecyclerActivity extends AppCompatActivity {
      */
     private void prepareFirebase() {
 
-        dbIngredient = FirebaseDatabase.getInstance().getReference("0/ingredient/");
+        // firebase
+        DatabaseReference dbIngredient = FirebaseDatabase.getInstance().getReference("0/ingredient/");
         // Attach a listener to read the data at our posts reference
         dbIngredient.addValueEventListener(new ValueEventListener() {
             @Override
@@ -183,7 +180,7 @@ public class RecyclerActivity extends AppCompatActivity {
 
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-        dbRecipe = FirebaseDatabase.getInstance().getReference("0/recipe");
+        DatabaseReference dbRecipe = FirebaseDatabase.getInstance().getReference("0/recipe");
         // Attach a listener to read the data at our posts reference
         dbRecipe.addValueEventListener(new ValueEventListener() {
             @Override
@@ -219,7 +216,7 @@ public class RecyclerActivity extends AppCompatActivity {
 
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-        dbRecipeIngredients = FirebaseDatabase.getInstance().getReference("0/recipe_ingredients");
+        DatabaseReference dbRecipeIngredients = FirebaseDatabase.getInstance().getReference("0/recipe_ingredients");
         // Attach a listener to read the data at our posts reference
         dbRecipeIngredients.addValueEventListener(new ValueEventListener() {
             @Override
@@ -253,7 +250,7 @@ public class RecyclerActivity extends AppCompatActivity {
 
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-        dbRecipeSteps = FirebaseDatabase.getInstance().getReference("0/recipe_steps");
+        DatabaseReference dbRecipeSteps = FirebaseDatabase.getInstance().getReference("0/recipe_steps");
         // Attach a listener to read the data at our posts reference
         dbRecipeSteps.addValueEventListener(new ValueEventListener() {
             @Override

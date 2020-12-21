@@ -42,12 +42,9 @@ public class FavouritesActivity extends AppCompatActivity {
     public List<Recipe_Ingredients> recipeIngredientlist = new ArrayList<Recipe_Ingredients>();
     public List<Recipe_Steps> recipeStepslist = new ArrayList<Recipe_Steps>();
     private RecyclerView recyclerView;
-    private AlbumAdapter albumAdapter;
     private RecipeAdapter recipeAdapter;
     private List<Album> albumList;
     private AppBarConfiguration mAppBarConfiguration;
-    // firebase
-    private DatabaseReference dbIngredient, dbRecipe, dbRecipeIngredients, dbRecipeSteps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +73,7 @@ public class FavouritesActivity extends AppCompatActivity {
         prepareRecipe();
         prepareAlbums();
 
-        albumAdapter = new AlbumAdapter(this, albumList);
+        AlbumAdapter albumAdapter = new AlbumAdapter(this, albumList);
         recipeAdapter = new RecipeAdapter(this, recipelist);
 
         prepareRecyclerView();
@@ -119,7 +116,8 @@ public class FavouritesActivity extends AppCompatActivity {
      */
     private void prepareFirebase() {
 
-        dbIngredient = FirebaseDatabase.getInstance().getReference("0/ingredient/");
+        // firebase
+        DatabaseReference dbIngredient = FirebaseDatabase.getInstance().getReference("0/ingredient/");
         // Attach a listener to read the data at our posts reference
         dbIngredient.addValueEventListener(new ValueEventListener() {
             @Override
@@ -160,7 +158,7 @@ public class FavouritesActivity extends AppCompatActivity {
 
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-        dbRecipe = FirebaseDatabase.getInstance().getReference("0/recipe");
+        DatabaseReference dbRecipe = FirebaseDatabase.getInstance().getReference("0/recipe");
         // Attach a listener to read the data at our posts reference
         dbRecipe.addValueEventListener(new ValueEventListener() {
             @Override
@@ -196,7 +194,7 @@ public class FavouritesActivity extends AppCompatActivity {
 
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-        dbRecipeIngredients = FirebaseDatabase.getInstance().getReference("0/recipe_ingredients");
+        DatabaseReference dbRecipeIngredients = FirebaseDatabase.getInstance().getReference("0/recipe_ingredients");
         // Attach a listener to read the data at our posts reference
         dbRecipeIngredients.addValueEventListener(new ValueEventListener() {
             @Override
@@ -230,7 +228,7 @@ public class FavouritesActivity extends AppCompatActivity {
 
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-        dbRecipeSteps = FirebaseDatabase.getInstance().getReference("0/recipe_steps");
+        DatabaseReference dbRecipeSteps = FirebaseDatabase.getInstance().getReference("0/recipe_steps");
         // Attach a listener to read the data at our posts reference
         dbRecipeSteps.addValueEventListener(new ValueEventListener() {
             @Override

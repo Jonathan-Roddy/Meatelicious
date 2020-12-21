@@ -15,10 +15,8 @@ import com.mad.meatelicious.TimerActivity;
 
 public class TimerFragment extends Fragment {
 
-    private TimerViewModel timerViewModel;
-
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
-        timerViewModel = ViewModelProviders.of(this).get(TimerViewModel.class);
+        TimerViewModel timerViewModel = ViewModelProviders.of(this).get(TimerViewModel.class);
         View root = inflater.inflate(R.layout.fragment_timer, container, false);
 
 

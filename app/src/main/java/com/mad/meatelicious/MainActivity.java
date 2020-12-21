@@ -49,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-    // firebase
-    private DatabaseReference dbIngredient, dbRecipe, dbRecipeIngredients,dbRecipeSteps;
-
 
     // this will store my lists from firebase
     final public List<Ingredient> ingredientlistFromFirebase = new ArrayList<Ingredient>();
@@ -111,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void prepareFirebase() {
 
-        dbIngredient= FirebaseDatabase.getInstance().getReference("0/ingredient/");
+        // firebase
+        DatabaseReference dbIngredient = FirebaseDatabase.getInstance().getReference("0/ingredient/");
         // Attach a listener to read the data at our posts reference
         dbIngredient.addValueEventListener(new ValueEventListener() {
             @Override
@@ -120,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
 
                 // Shake hands with all of them
-                for(DataSnapshot child : children ){
+                for (DataSnapshot child : children) {
 //                    System.out.println(child);
 //                    System.out.println("///////////// " + child.getValue());
                     Ingredient ingredient = child.getValue(Ingredient.class);
@@ -152,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-        dbRecipe = FirebaseDatabase.getInstance().getReference("0/recipe");
+        DatabaseReference dbRecipe = FirebaseDatabase.getInstance().getReference("0/recipe");
         // Attach a listener to read the data at our posts reference
         dbRecipe.addValueEventListener(new ValueEventListener() {
             @Override
@@ -175,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
 
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-        dbRecipeIngredients = FirebaseDatabase.getInstance().getReference("0/recipe_ingredients");
+        DatabaseReference dbRecipeIngredients = FirebaseDatabase.getInstance().getReference("0/recipe_ingredients");
         // Attach a listener to read the data at our posts reference
         dbRecipeIngredients.addValueEventListener(new ValueEventListener() {
             @Override
@@ -198,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-        dbRecipeSteps = FirebaseDatabase.getInstance().getReference("0/recipe_steps");
+        DatabaseReference dbRecipeSteps = FirebaseDatabase.getInstance().getReference("0/recipe_steps");
         // Attach a listener to read the data at our posts reference
         dbRecipeSteps.addValueEventListener(new ValueEventListener() {
             @Override

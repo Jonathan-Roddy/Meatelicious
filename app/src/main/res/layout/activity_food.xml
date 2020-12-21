@@ -66,6 +66,7 @@
                         android:layout_height="wrap_content"
                         android:text="Recipe 1"
                         android:textAlignment="center"
+                        android:gravity="center_horizontal"
                         android:textSize="20dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -99,6 +100,7 @@
                         android:layout_height="wrap_content"
                         android:text="Recipe 2"
                         android:textAlignment="center"
+                        android:gravity="center_horizontal"
                         android:textSize="20dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -134,13 +136,14 @@
                         android:layout_width="130dp"
                         android:layout_height="120dp"
                         android:background="@drawable/food_3"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recipe 3"
                         android:textSize="20dp"
                         android:textAlignment="center"
-                        />
+                        android:gravity="center_horizontal" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -165,13 +168,14 @@
                         android:layout_width="130dp"
                         android:layout_height="120dp"
                         android:background="@drawable/food_4"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recipe 1"
                         android:textSize="20dp"
                         android:textAlignment="center"
-                        />
+                        android:gravity="center_horizontal" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -206,13 +210,14 @@
                         android:layout_width="130dp"
                         android:layout_height="120dp"
                         android:background="@drawable/food_5"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recipe 5"
                         android:textSize="20dp"
                         android:textAlignment="center"
-                        />
+                        android:gravity="center_horizontal" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView

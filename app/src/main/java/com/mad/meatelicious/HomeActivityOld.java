@@ -17,7 +17,6 @@ import java.util.List;
 
 public class HomeActivityOld extends AppCompatActivity{
 
-    private RecyclerView recyclerView;
     private RecipeAdapter adapter;
     private List<Album> albumList;
 
@@ -32,7 +31,7 @@ public class HomeActivityOld extends AppCompatActivity{
 
         albumList = new ArrayList<>();
         //recyclerView = (RecyclerView) findViewById(R.id.recipe_recycler_view);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
         //adapter = new RecipeAdapter(this, albumList);
 
